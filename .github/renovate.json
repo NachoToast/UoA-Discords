@@ -5,7 +5,7 @@
     "labels": ["dependencies"],
     "packageRules": [
         {
-            "matchManagers": ["pnpm"],
+            "matchManagers": ["npm"],
             "matchDepTypes": ["devDependencies"],
             "enabled": false
         }
