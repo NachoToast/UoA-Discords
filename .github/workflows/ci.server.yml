@@ -1,4 +1,5 @@
-name: CI (Server)
+name: Server CI
+run-name: eio
 
 on:
     push:
