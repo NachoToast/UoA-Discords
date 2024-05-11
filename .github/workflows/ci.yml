@@ -16,9 +16,6 @@ jobs:
         name: Check changes
         runs-on: ubuntu-latest
 
-        permissions:
-            pull-requests: read
-
         outputs:
             server: ${{ steps.filter.outputs.server }}
             website: ${{ steps.filter.outputs.website }}
