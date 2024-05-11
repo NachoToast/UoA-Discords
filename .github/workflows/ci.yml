@@ -1,4 +1,4 @@
-name: CI (Server)
+name: CI
 
 on:
     push:
@@ -12,9 +12,39 @@ defaults:
         working-directory: server
 
 jobs:
-    build:
-        name: Node
+    check:
+        name: Check changes
         runs-on: ubuntu-latest
+
+        permissions:
+            pull-requests: read
+
+        outputs:
+            server: ${{ steps.filter.outputs.server }}
+            website: ${{ steps.filter.outputs.website }}
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Analyse paths
+              uses: dorny/paths-filter@v3
+              id: filter
+              with:
+                  filters: |
+                      server:
+                        - server/**
+                        - .github/**
+
+                      frontend:
+                        - server/**
+                        - .github/**
+
+    server:
+        name: Server
+        runs-on: ubuntu-latest
+        needs: check
+        if: ${{ needs.check.outputs.server == 'true'}}
         timeout-minutes: 3
 
         strategy:
