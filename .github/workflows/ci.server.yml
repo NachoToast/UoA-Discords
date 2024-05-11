@@ -1,0 +1,62 @@
+name: CI (Server)
+
+on:
+    push:
+        paths-ignore:
+            - 'website/**'
+            - '.github/workflows/*.website.yml'
+            - '**/*.md'
+
+defaults:
+    run:
+        working-directory: server
+
+jobs:
+    build:
+        name: Node
+        runs-on: ubuntu-latest
+        timeout-minutes: 3
+
+        strategy:
+            matrix:
+                node-version: [20.x]
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 9
+
+            - name: Setup Node ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Typecheck
+              run: pnpm typecheck
+
+            - name: Lint
+              run: pnpm lint
+
+            - name: Test
+              run: pnpm coverage
+
+            - name: Upload test coverage
+              uses: codecov/codecov-action@v3
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN  }}
+
+            - name: Build
+              run: pnpm build
+
+            - name: Upload build artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  path: build
