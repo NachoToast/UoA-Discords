@@ -1,4 +1,4 @@
-# UoA Discords <img src="assets/logo192.png" style="height: 2ch; transform: scaleX(-1) translateY(20%);" alt="cartoon kiwi in front of a laptop" />
+# UoA Discords <img src="assets/logo192.png" style="height: 2ch;" alt="cartoon kiwi in front of a laptop" />
 
 _What's this?_
 
