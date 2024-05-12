@@ -1,6 +1,7 @@
 # UoA Discords / Server <!-- omit in toc -->
 
 [![Server CI](https://github.com/NachoToast/UoA-Discords/actions/workflows/ci.server.yml/badge.svg)](https://github.com/NachoToast/UoA-Discords/actions/workflows/ci.server.yml)
+[![Server CD](https://github.com/NachoToast/UoA-Discords/actions/workflows/cd.server.yml/badge.svg)](https://github.com/NachoToast/UoA-Discords/actions/workflows/cd.server.yml)
 
 ## Table of Contents <!-- omit in toc -->
 
