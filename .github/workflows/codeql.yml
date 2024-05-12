@@ -1,6 +1,10 @@
 name: 'CodeQL Analysis'
 
-on: [push]
+on:
+    push:
+        paths-ignore:
+            - 'assets/**'
+            - '**/*.md'
 
 permissions:
     security-events: write
