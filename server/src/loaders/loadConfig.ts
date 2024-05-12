@@ -5,6 +5,7 @@ export function loadConfig(): void {
     try {
         CONFIG.loadClientUrls();
         CONFIG.loadPort();
+        CONFIG.loadProxyCount();
         CONFIG.loadRateLimit();
     } catch (error) {
         if (error instanceof ConfigError) {

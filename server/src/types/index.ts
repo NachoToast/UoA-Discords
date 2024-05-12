@@ -1,2 +1,2 @@
 export * from './Colours.js';
-export * from './MiddlewareProvider.js';
+export * from './Endpoint.js';

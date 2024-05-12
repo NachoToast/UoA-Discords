@@ -2,6 +2,7 @@ import {
     loadApp,
     loadConfig,
     loadMiddleware,
+    loadRoutes,
     startServer,
 } from './loaders/index.js';
 
@@ -21,5 +22,5 @@ loadConfig();
 const app = loadApp();
 
 loadMiddleware(app);
-
+loadRoutes(app);
 startServer(app);

@@ -1,6 +1,11 @@
-import express from 'express';
+import express, { ErrorRequestHandler, RequestHandler } from 'express';
 import request from 'supertest';
-import { MiddlewareProvider } from '../types/MiddlewareProvider.js';
+
+type MiddlewareProvider = () =>
+    | RequestHandler
+    | ErrorRequestHandler
+    | RequestHandler[]
+    | ErrorRequestHandler[];
 
 interface StubAppConfig {
     preRouteMiddleware?: MiddlewareProvider[];

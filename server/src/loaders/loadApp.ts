@@ -36,5 +36,15 @@ export function loadApp(): Express {
         } mode`,
     );
 
+    if (CONFIG.PROXY_COUNT > 0) {
+        app.set('trust proxy', CONFIG.PROXY_COUNT);
+
+        console.log(
+            `${Colours.FgMagenta}${CONFIG.PROXY_COUNT.toString()}${
+                Colours.Reset
+            } Prox${CONFIG.PROXY_COUNT !== 1 ? 'ies' : 'y'} configured`,
+        );
+    }
+
     return app;
 }
