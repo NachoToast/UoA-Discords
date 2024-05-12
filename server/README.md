@@ -3,6 +3,7 @@
 [![Server CI](https://github.com/NachoToast/UoA-Discords/actions/workflows/ci.server.yml/badge.svg)](https://github.com/NachoToast/UoA-Discords/actions/workflows/ci.server.yml)
 [![Server CD](https://github.com/NachoToast/UoA-Discords/actions/workflows/cd.server.yml/badge.svg)](https://github.com/NachoToast/UoA-Discords/actions/workflows/cd.server.yml)
 [![codecov](https://codecov.io/gh/NachoToast/UoA-Discords/graph/badge.svg?token=KYZSLQOA1R)](https://codecov.io/gh/NachoToast/UoA-Discords)
+[![CodeQL Analysis](https://github.com/NachoToast/UoA-Discords/actions/workflows/codeql.yml/badge.svg)](https://github.com/NachoToast/UoA-Discords/actions/workflows/codeql.yml)
 
 ## Table of Contents <!-- omit in toc -->
 
