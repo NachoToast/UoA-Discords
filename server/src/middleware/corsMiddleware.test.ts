@@ -53,8 +53,6 @@ describe.concurrent(corsMiddleware.name, () => {
                 preRouteMiddleware: [corsMiddleware],
             });
 
-            console.log(CONFIG.CLIENT_URLS);
-
             const [response1, response2, response3] = await Promise.all([
                 app.get('/').send(),
                 app.get('/').set('origin', whitelistedOrigin).send(),
