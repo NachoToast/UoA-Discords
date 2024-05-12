@@ -99,6 +99,8 @@ docker compose up --build --detach
   - Server middleware for handling CORS mechanisms.
 - [express](https://www.npmjs.com/package/express)
   - Underlying HTTP server framework.
+- [express-rate-limit](https://www.npmjs.com/package/express-rate-limit)
+  - Provides rate-limiting functionality for the server.
 
 #### Development Dependencies
 

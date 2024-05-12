@@ -19,11 +19,6 @@ export function makeOriginFunction(): CorsOptions['origin'] {
 export function corsMiddleware(): RequestHandler {
     return cors({
         origin: makeOriginFunction(),
-        exposedHeaders: [
-            'RateLimit-Limit',
-            'RateLimit-Remaining',
-            'RateLimit-Reset',
-            'Retry-After',
-        ],
+        exposedHeaders: ['RateLimit', 'RateLimit-Policy'],
     });
 }
