@@ -60,7 +60,11 @@ cp .env.example .env
 
 ### Deployment
 
-_TBD_
+Using [Docker](https://www.docker.com/):
+
+```sh
+docker compose up --build --detach
+```
 
 ### Script Reference
 
@@ -90,6 +94,11 @@ _TBD_
 
 > These dependencies are required for development and in production.
 
+- [cors](https://www.npmjs.com/package/cors)
+  - Server middleware for handling CORS mechanisms.
+- [express](https://www.npmjs.com/package/express)
+  - Underlying HTTP server framework.
+
 #### Development Dependencies
 
 > These dependencies are used for development purposes only, and not required for production.
@@ -101,6 +110,8 @@ _TBD_
   - Provides code coverage reports from tests.
 - [eslint](https://www.npmjs.com/package/eslint)
   - Code linting tool.
+- [supertest](https://www.npmjs.com/package/supertest)
+  - Allows for easy integration testing of HTTP requests to the server.
 - [tsx](https://www.npmjs.com/package/tsx)
   - Executes TypeScript in Node.js (since Node cannot run TypeScript natively), which is useful for development since it skips the build step.
   - Usually I use [ts-node](https://www.npmjs.com/package/ts-node) instead, but it has issues when [using it with ESM](https://www.npmjs.com/package/ts-node#err_unknown_file_extension) and [new Node APIs](https://nodejs.org/docs/v20.12.1/api/cli.html#--env-fileconfig) that tsx does not.

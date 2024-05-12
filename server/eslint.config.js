@@ -43,7 +43,7 @@ export default tseslint.config(
                 "error",
                 {
                     "selector": "default",
-                    "format": ["strictCamelCase"]
+                    "format": ["strictCamelCase", 'UPPER_CASE']
                 },
                 {
                     // Parameters for functions must be strict camel case.

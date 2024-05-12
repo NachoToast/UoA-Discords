@@ -1,3 +1,1 @@
-export interface SomeThing {
-    someField: string;
-}
+export * from './Responses';
