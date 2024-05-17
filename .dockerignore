@@ -7,4 +7,5 @@
 !server/package.json
 !server/pnpm-lock.yaml
 !server/tsconfig.json
+!server/tsconfig.build.json
 !server/.env
