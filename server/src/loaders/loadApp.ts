@@ -1,9 +1,9 @@
-import express, { Express } from 'express';
+import express from 'express';
 import { CONFIG } from '../config/index.js';
 import { Colours } from '../types/Colours.js';
 
-export function startServer(app: Express): void {
-    const server = app.listen(CONFIG.PORT, () => {
+export function startServer(): void {
+    const server = CONFIG.app.listen(CONFIG.PORT, () => {
         const addressData = server.address();
 
         if (addressData === null) {
@@ -27,7 +27,7 @@ export function startServer(app: Express): void {
     });
 }
 
-export function loadApp(): Express {
+export function loadApp(): void {
     const app = express();
 
     console.log(
@@ -46,5 +46,5 @@ export function loadApp(): Express {
         );
     }
 
-    return app;
+    CONFIG.setApp(app);
 }

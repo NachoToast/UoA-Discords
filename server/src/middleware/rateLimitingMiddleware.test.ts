@@ -6,11 +6,8 @@ import { rateLimitingMiddleware } from './rateLimitingMiddleware.js';
 const rateLimitHeader = 'access-control-allow-origin';
 
 describe.concurrent(rateLimitingMiddleware.name, () => {
-    // Not Ratelimited yet.
     let responseNormalA: ResponseData;
     let responseNormalB: ResponseData;
-
-    // Ratelimiting starts.
     let responseRateLimited: ResponseData;
 
     beforeAll(async () => {
@@ -23,6 +20,7 @@ describe.concurrent(rateLimitingMiddleware.name, () => {
             app.get('/').send(),
         ]);
 
+        // Now should be rate limited.
         const response3 = await app.get('/').send();
 
         responseNormalA = getResponseData(response1, rateLimitHeader);

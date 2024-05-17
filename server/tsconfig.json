@@ -16,6 +16,7 @@
         "paths": {
             "@shared": ["../shared/index.d.ts"]
         },
+        "resolveJsonModule": true,
 
         // Emit
         "outDir": "build",

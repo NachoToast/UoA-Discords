@@ -1,4 +1,5 @@
 import {
+    loadApiSpec,
     loadApp,
     loadConfig,
     loadMiddleware,
@@ -18,9 +19,9 @@ process.on('unhandledRejection', (error, promise) => {
 });
 
 loadConfig();
+loadApp();
+loadApiSpec();
+loadMiddleware();
+loadRoutes();
 
-const app = loadApp();
-
-loadMiddleware(app);
-loadRoutes(app);
-startServer(app);
+startServer();

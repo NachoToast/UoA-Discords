@@ -1,5 +1,6 @@
 import express, { ErrorRequestHandler, RequestHandler } from 'express';
 import request from 'supertest';
+import { CONFIG } from '../config/index.js';
 
 type MiddlewareProvider = () =>
     | RequestHandler
@@ -17,6 +18,8 @@ export function stubApp({
     postRouteMiddleware,
 }: StubAppConfig = {}): ReturnType<typeof request> {
     const app = express();
+
+    CONFIG.setApp(app);
 
     if (preRouteMiddleware !== undefined) {
         for (const middleware of preRouteMiddleware) {
