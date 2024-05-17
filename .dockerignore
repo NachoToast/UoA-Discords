@@ -8,4 +8,5 @@
 !server/pnpm-lock.yaml
 !server/tsconfig.json
 !server/tsconfig.build.json
+!server/openapi.json
 !server/.env
