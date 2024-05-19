@@ -1,29 +1,26 @@
-import express, { ErrorRequestHandler, RequestHandler } from 'express';
+import express from 'express';
 import request from 'supertest';
-import { CONFIG } from '../config/index.js';
+import { Config, MiddlewareProvider } from '../types/index.js';
+import { mockedConfig } from './mockedConfig.js';
 
-type MiddlewareProvider = () =>
-    | RequestHandler
-    | ErrorRequestHandler
-    | RequestHandler[]
-    | ErrorRequestHandler[];
-
-interface StubAppConfig {
+interface StubAppProps {
+    config?: Partial<Config>;
     preRouteMiddleware?: MiddlewareProvider[];
     postRouteMiddleware?: MiddlewareProvider[];
 }
 
 export function stubApp({
+    config,
     preRouteMiddleware,
     postRouteMiddleware,
-}: StubAppConfig = {}): ReturnType<typeof request> {
+}: StubAppProps = {}): ReturnType<typeof request> {
     const app = express();
 
-    CONFIG.setApp(app);
+    const fullConfig: Config = { ...mockedConfig, ...config };
 
     if (preRouteMiddleware !== undefined) {
         for (const middleware of preRouteMiddleware) {
-            app.use(middleware());
+            app.use(middleware(fullConfig));
         }
     }
 
@@ -31,7 +28,7 @@ export function stubApp({
 
     if (postRouteMiddleware !== undefined) {
         for (const middleware of postRouteMiddleware) {
-            app.use(middleware());
+            app.use(middleware(fullConfig));
         }
     }
 

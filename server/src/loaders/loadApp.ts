@@ -1,50 +1,57 @@
-import express from 'express';
-import { CONFIG } from '../config/index.js';
-import { Colours } from '../types/Colours.js';
+import express, { Express } from 'express';
+import { Colour, Config } from '../types/index.js';
 
-export function startServer(): void {
-    const server = CONFIG.app.listen(CONFIG.PORT, () => {
+function startServer(app: Express, { port }: Config): void {
+    const server = app.listen(port, () => {
         const addressData = server.address();
 
         if (addressData === null) {
             console.log(
-                `Now listening on ${Colours.FgMagenta}an unknown address${Colours.Reset}`,
+                `Now listening on ${Colour.FgMagenta}an unknown address${Colour.Reset}`,
             );
         } else if (typeof addressData === 'string') {
             console.log(
-                `Now listening on ${Colours.FgCyan}${addressData}${Colours.Reset}`,
+                `Now listening on ${Colour.FgCyan}${addressData}${Colour.Reset}`,
             );
         } else {
             console.log(
                 `Now listening on ${
-                    Colours.FgCyan
+                    Colour.FgCyan
                 }http://${addressData.address.replace(
                     '::',
                     'localhost',
-                )}:${addressData.port.toString()}${Colours.Reset}`,
+                )}:${addressData.port.toString()}${Colour.Reset}`,
             );
         }
     });
 }
 
-export function loadApp(): void {
+export function loadApp(config: Config): {
+    app: Express;
+    startApp: () => void;
+} {
     const app = express();
 
     console.log(
-        `Running in ${Colours.FgMagenta}${app.get('env') as string}${
-            Colours.Reset
+        `Running in ${Colour.FgMagenta}${app.get('env') as string}${
+            Colour.Reset
         } mode`,
     );
 
-    if (CONFIG.PROXY_COUNT > 0) {
-        app.set('trust proxy', CONFIG.PROXY_COUNT);
+    if (config.proxyCount > 0) {
+        app.set('trust proxy', config.proxyCount);
 
         console.log(
-            `${Colours.FgMagenta}${CONFIG.PROXY_COUNT.toString()}${
-                Colours.Reset
-            } Prox${CONFIG.PROXY_COUNT !== 1 ? 'ies' : 'y'} configured`,
+            `${Colour.FgMagenta}${config.proxyCount.toString()}${
+                Colour.Reset
+            } Prox${config.proxyCount !== 1 ? 'ies' : 'y'} configured`,
         );
     }
 
-    CONFIG.setApp(app);
+    return {
+        app,
+        startApp: (): void => {
+            startServer(app, config);
+        },
+    };
 }

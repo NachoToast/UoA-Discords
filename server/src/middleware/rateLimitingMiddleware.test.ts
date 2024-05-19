@@ -1,5 +1,4 @@
 import { beforeAll, describe, expect, test } from 'vitest';
-import { CONFIG } from '../config/index.js';
 import { ResponseData, getResponseData, stubApp } from '../tests/index.js';
 import { rateLimitingMiddleware } from './rateLimitingMiddleware.js';
 
@@ -11,9 +10,10 @@ describe.concurrent(rateLimitingMiddleware.name, () => {
     let responseRateLimited: ResponseData;
 
     beforeAll(async () => {
-        CONFIG.loadRateLimit(2);
-
-        const app = stubApp({ preRouteMiddleware: [rateLimitingMiddleware] });
+        const app = stubApp({
+            config: { rateLimit: 2 },
+            preRouteMiddleware: [rateLimitingMiddleware],
+        });
 
         const [response1, response2] = await Promise.all([
             app.get('/').send(),

@@ -1,4 +1,4 @@
-import { Endpoint } from '../../types/Endpoint.js';
+import { Endpoint } from '../../types/index.js';
 
 export const getRoot: Endpoint<void, string> = (_req, res) => {
     res.status(200).send(

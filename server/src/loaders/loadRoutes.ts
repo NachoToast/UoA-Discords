@@ -1,8 +1,8 @@
-import { CONFIG } from '../config/index.js';
-import { getIp, getRoot } from '../routes/miscellaneous/index.js';
+import { Express } from 'express';
+import { getIp, getRoot } from '../routes/index.js';
 
-export function loadRoutes(): void {
-    CONFIG.app.get('/', getRoot);
+export function loadRoutes(app: Express): void {
+    app.get('/', getRoot);
 
-    CONFIG.app.get('/ip', getIp);
+    app.get('/ip', getIp);
 }

@@ -1,5 +1,4 @@
 import { beforeAll, describe, expect, test } from 'vitest';
-import { CONFIG } from '../config/index.js';
 import { ResponseData, getResponseData, stubApp } from '../tests/index.js';
 import { corsMiddleware } from './corsMiddleware.js';
 
@@ -11,9 +10,10 @@ describe.concurrent(corsMiddleware.name, () => {
         let responseWithOrigin: ResponseData;
 
         beforeAll(async () => {
-            CONFIG.loadClientUrls(new Set(['*']));
-
-            const app = stubApp({ preRouteMiddleware: [corsMiddleware] });
+            const app = stubApp({
+                config: { clientUrls: new Set(['*']) },
+                preRouteMiddleware: [corsMiddleware],
+            });
 
             const [response1, response2] = await Promise.all([
                 app.get('/').send(),
@@ -47,9 +47,8 @@ describe.concurrent(corsMiddleware.name, () => {
         const nonWhitelistedOrigin = 'https://google.com';
 
         beforeAll(async () => {
-            CONFIG.loadClientUrls(new Set([whitelistedOrigin]));
-
             const app = stubApp({
+                config: { clientUrls: new Set([whitelistedOrigin]) },
                 preRouteMiddleware: [corsMiddleware],
             });
 

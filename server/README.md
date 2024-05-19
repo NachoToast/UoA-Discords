@@ -101,6 +101,8 @@ docker compose up --build --detach
   - Underlying HTTP server framework.
 - [express-rate-limit](https://www.npmjs.com/package/express-rate-limit)
   - Provides rate-limiting functionality for the server.
+- [pg](https://www.npmjs.com/package/pg)
+  - Client for PostgreSQL.
 - [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
   - Generates API documentation from our [OpenAPI schema](src/openapi.json).
   - This is viewable on the `/api-docs` route.

@@ -4,7 +4,6 @@ import {
     loadConfig,
     loadMiddleware,
     loadRoutes,
-    startServer,
 } from './loaders/index.js';
 
 process.on('uncaughtException', (error) => {
@@ -18,10 +17,11 @@ process.on('unhandledRejection', (error, promise) => {
     process.exit(1);
 });
 
-loadConfig();
-loadApp();
-loadApiSpec();
-loadMiddleware();
-loadRoutes();
+const config = loadConfig();
+const { app, startApp } = loadApp(config);
 
-startServer();
+loadApiSpec(app);
+loadMiddleware(app, config);
+loadRoutes(app);
+
+startApp();

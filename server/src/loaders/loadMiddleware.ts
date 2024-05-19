@@ -1,13 +1,12 @@
-import express from 'express';
-import { CONFIG } from '../config/index.js';
-import { corsMiddleware } from '../middleware/corsMiddleware.js';
-import { rateLimitingMiddleware } from '../middleware/rateLimitingMiddleware.js';
+import express, { Express } from 'express';
+import { corsMiddleware, rateLimitingMiddleware } from '../middleware/index.js';
+import { Config } from '../types/index.js';
 
-export function loadMiddleware(): void {
-    CONFIG.app.use(express.json());
-    CONFIG.app.use(corsMiddleware());
+export function loadMiddleware(app: Express, config: Config): void {
+    app.use(express.json());
+    app.use(corsMiddleware(config));
 
-    if (CONFIG.RATE_LIMIT > 0) {
-        CONFIG.app.use(rateLimitingMiddleware());
+    if (config.rateLimit > 0) {
+        app.use(rateLimitingMiddleware(config));
     }
 }

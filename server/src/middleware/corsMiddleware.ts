@@ -1,14 +1,15 @@
 import cors, { CorsOptions } from 'cors';
-import { RequestHandler } from 'express';
-import { CONFIG } from '../config/index.js';
-import { CorsError } from '../errors/CorsError.js';
+import { CorsError } from '../errors/index.js';
+import { Config, MiddlewareProvider } from '../types/index.js';
 
-export function makeOriginFunction(): CorsOptions['origin'] {
-    if (CONFIG.CLIENT_URLS.has('*')) return '*';
+export function makeOriginFunction(
+    clientUrls: Config['clientUrls'],
+): CorsOptions['origin'] {
+    if (clientUrls.has('*')) return '*';
 
     return (origin, callback) => {
         // Origin is undefined on non-browser requests (e.g. Insomnia).
-        if (origin === undefined || CONFIG.CLIENT_URLS.has(origin)) {
+        if (origin === undefined || clientUrls.has(origin)) {
             callback(null, true);
         } else {
             callback(new CorsError());
@@ -16,9 +17,9 @@ export function makeOriginFunction(): CorsOptions['origin'] {
     };
 }
 
-export function corsMiddleware(): RequestHandler {
+export const corsMiddleware: MiddlewareProvider = ({ clientUrls }) => {
     return cors({
-        origin: makeOriginFunction(),
+        origin: makeOriginFunction(clientUrls),
         exposedHeaders: ['RateLimit', 'RateLimit-Policy'],
     });
-}
+};
