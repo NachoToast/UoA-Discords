@@ -10,3 +10,4 @@ services:
             - ${PORT}:${PORT}
         restart: ${COMPOSE_RESTART_POLICY}
         mem_limit: ${COMPOSE_HARD_MEMORY_LIMIT}
+        mem_reservation: ${COMPOSE_SOFT_MEMORY_LIMIT}
